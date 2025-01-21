@@ -1,0 +1,79 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Flask",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "flask",
+      "env": {
+        "FLASK_APP": "app.main",
+        "FLASK_ENV": "development"
+      },
+      "args": [
+        "run",
+        "--no-debugger",
+        "--no-reload"
+      ],
+      "jinja": true
+    },
+    {
+      "name": "Python: Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Python: All Tests",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/tests",
+      "args": [
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "*_test.py"
+      ],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Attach to Process",
+      "type": "debugpy",
+      "request": "attach",
+      "processId": "${command:pickProcess}",
+      "justMyCode": true
+    },
+    {
+      "name": "Node.js: Frontend Debug",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/frontend/app.js",
+      "outFiles": [
+        "${workspaceFolder}/frontend/**/*.js"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--inspect-brk"
+      ],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "SQL Debug: Oracle SQL*Plus",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/app/database.py",
+      "args": [],
+      "console": "integratedTerminal",
+      "env": {
+        "DB_USER": "SYSTEM",
+        "DB_PASSWORD": "241995270604",
+        "DB_HOST": "your_db_host",
+        "DB_NAME": "your_db_name"
+      }
+    }
+  ]
+}
