@@ -26,3 +26,16 @@ A project that tracks inventory and employee information.
 Run tests using:
 ```bash
 python -m unittest discover tests
+
+then output will be 
+Serving Flask app 'app' (lazy loading)
+ * Environment: development
+ * Debug mode: on
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 860-900-161
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+127.0.0.1 - - [21/Jan/2025 13:29:12] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Jan/2025 13:29:13] "GET /favicon.ico HTTP/1.1" 404 -
+
+##CONGRATULATION THE APP IS RUNNING WELL
