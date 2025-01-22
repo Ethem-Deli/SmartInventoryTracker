@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Fetch and display inventory items
     async function loadInventory() {
-        const response = await fetch('/api/inventory'); // Replace with your backend route
+        const response = await fetch('/api/inventory');
         const data = await response.json();
         const container = document.getElementById('inventory-items');
         container.innerHTML = ''; // Clear previous items
@@ -17,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Add new inventory item
     document.getElementById('inventory-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         const productName = document.getElementById('product-name').value;
@@ -40,6 +38,5 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Initial load
     loadInventory();
 });
