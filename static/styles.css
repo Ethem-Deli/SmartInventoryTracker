@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    padding: 1rem;
+}
+
+.form-section,
+.display-section {
+    margin-bottom: 2rem;
+}
+
+label {
+    display: block;
+    margin-top: 0.5rem;
+}
+
+input,
+button {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    width: 100%;
+    max-width: 400px;
+    display: block;
+}
+
+button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.display-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.inventory-item,
+.employee-item {
+    padding: 1rem;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+    flex: 1 1 calc(25% - 1rem);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.inventory-item {
+    background-color: gray;
+    /* Default in case JS fails */
+}
+
+.employee-item {
+    background-color: #007BFF;
+}

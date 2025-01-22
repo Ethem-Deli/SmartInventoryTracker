@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Inventory Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Smart Inventory Tracker</h1>
+    </header>
+
+    <main>
+        <!-- Inventory Form -->
+        <section class="form-section">
+            <h2>Add Inventory Item</h2>
+            <form id="inventory-form">
+                <label for="product_name">Product Name:</label>
+                <input type="text" id="product_name" name="product_name" required>
+
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" required>
+
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" step="0.01" required>
+
+                <label for="batch_name">Batch Name:</label>
+                <input type="text" id="batch_name" name="batch_name" required>
+
+                <button type="submit">Add Inventory</button>
+            </form>
+        </section>
+
+        <!-- Inventory Items Display -->
+        <section class="display-section">
+            <h2>Inventory Items</h2>
+            <div id="inventory-display" class="display-box"></div>
+        </section>
+
+        <!-- Employee Form -->
+        <section class="form-section">
+            <h2>Add Employee</h2>
+            <form id="employee-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="contact_details">Contact Details:</label>
+                <input type="text" id="contact_details" name="contact_details" required>
+
+                <label for="department">Department:</label>
+                <input type="text" id="department" name="department" required>
+
+                <button type="submit">Add Employee</button>
+            </form>
+        </section>
+
+        <!-- Employee List Display -->
+        <section class="display-section">
+            <h2>Employee Directory</h2>
+            <div id="employee-display" class="display-box"></div>
+        </section>
+    </main>
+
+    <script>
+        // Handle inventory submission
+        const inventoryForm = document.getElementById('inventory-form');
+        const inventoryDisplay = document.getElementById('inventory-display');
+
+        inventoryForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(inventoryForm);
+            const data = Object.fromEntries(formData);
+
+            // Send data to the server
+            const response = await fetch('/api/inventory', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                alert('Inventory item added!');
+                fetchInventory();
+                inventoryForm.reset();
+            } else {
+                alert('Failed to add inventory item.');
+            }
+        });
+
+        // Fetch and display inventory items
+        async function fetchInventory() {
+            const response = await fetch('/api/inventory');
+            const items = await response.json();
+
+            inventoryDisplay.innerHTML = ''; // Clear previous display
+            items.forEach(item => {
+                const itemBox = document.createElement('div');
+                itemBox.className = 'inventory-item';
+                itemBox.style.backgroundColor = item.quantity > 5 ? 'green' : 'red';
+                itemBox.innerHTML = `
+                    <strong>${item.product_name}</strong><br>
+                    Quantity: ${item.quantity}<br>
+                    Price: $${item.price.toFixed(2)}<br>
+                    Batch: ${item.batch_name}
+                `;
+                inventoryDisplay.appendChild(itemBox);
+            });
+        }
+
+        // Handle employee submission
+        const employeeForm = document.getElementById('employee-form');
+        const employeeDisplay = document.getElementById('employee-display');
+
+        employeeForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(employeeForm);
+            const data = Object.fromEntries(formData);
+
+            // Send data to the server
+            const response = await fetch('/api/employees', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                alert('Employee added!');
+                fetchEmployees();
+                employeeForm.reset();
+            } else {
+                alert('Failed to add employee.');
+            }
+        });
+
+        // Fetch and display employees
+        async function fetchEmployees() {
+            const response = await fetch('/api/employees');
+            const employees = await response.json();
+
+            employeeDisplay.innerHTML = ''; // Clear previous display
+            employees.forEach(emp => {
+                const empBox = document.createElement('div');
+                empBox.className = 'employee-item';
+                empBox.innerHTML = `
+                    <strong>${emp.name}</strong><br>
+                    Contact: ${emp.contact_details}<br>
+                    Department: ${emp.department}
+                `;
+                employeeDisplay.appendChild(empBox);
+            });
+        }
+
+        // Initial data fetch
+        fetchInventory();
+        fetchEmployees();
+    </script>
+</body>
+
+</html>
