@@ -74,3 +74,6 @@ Serving Flask app 'app' (lazy loading)
 127.0.0.1 - - [21/Jan/2025 13:29:13] "GET /favicon.ico HTTP/1.1" 404 -
 
 ##CONGRATULATION THE APP IS RUNNING WELL
+
+youtube video walktrough the code
+https://youtu.be/oieFII7i8SE
